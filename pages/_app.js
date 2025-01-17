@@ -43,10 +43,10 @@ export default function App() {
 
   function getParameterTitle(parameter) {
     const parameterTitel = {
-      RainDur: "Regendauer",
-      T: "Temperatur",
-      T_max_h1: "Maximaltemperatur",
-      p: "Luftdruck",
+      RainDur: "Regendauer in min",
+      T: "Temperatur in °C",
+      T_max_h1: "Maximaltemperatur in °C",
+      p: "Luftdruck in hPa",
     };
     return parameterTitel[parameter];
   }
@@ -91,7 +91,7 @@ export default function App() {
           alignItems: "flex-start",
         }}
       >
-        <div style={{ marginLeft: "15px" }}>
+        <div style={{ marginLeft: "15px", marginTop: "30px" }}>
           <FormControl sx={{ width: 250 }}>
             <InputLabel id="standort-select-label">Standort </InputLabel>
             <Select
@@ -108,7 +108,7 @@ export default function App() {
             </Select>
           </FormControl>
         </div>
-        <div>
+        <div style={{ marginLeft: "15px", marginTop: "15px" }}>
           <FormControl sx={{ width: 250 }}>
             <InputLabel id="parameter-select-label">Parameter</InputLabel>
             <Select
@@ -125,7 +125,7 @@ export default function App() {
             </Select>
           </FormControl>
         </div>
-        <div>
+        <div style={{ marginLeft: "15px", marginTop: "15px" }}>
           <Button
             variant="contained"
             onClick={() => {
@@ -137,7 +137,7 @@ export default function App() {
             Diagramm erstellen
           </Button>
         </div>
-        <div style={{ marginLeft: "15px" }}>
+        <div style={{ marginLeft: "15px", marginTop: "50px" }}>
           {diagramm && spec && <VegaLite spec={spec} />}
         </div>
       </div>
