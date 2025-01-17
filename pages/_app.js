@@ -12,7 +12,7 @@ import { VegaLite } from "react-vega";
 
 export default function App() {
   const [standort, setStandort] = useState([]);
-  const [standortgef, setStandortgef] = useState([1]);
+  const [standortgef, setStandortgef] = useState("");
   const [daten, setDaten] = useState([]);
   const [datengef, setDatengef] = useState([]);
   const [parameter, setParameter] = useState("T");
@@ -30,7 +30,7 @@ export default function App() {
       setDaten(JSONDaten);
       setDatengef(JSONDaten);
       setStandort(JSONStandorte);
-      setStandortgef(JSONStandorte[1]);
+      setStandortgef(JSONStandorte[1] || "");
     });
   }, []);
 
