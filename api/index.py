@@ -11,7 +11,7 @@ app.add_middleware(
      allow_headers=["*"],)
 
 base_dir = os.path.dirname(__file__)
-json_file_path = os.path.join(base_dir, "/data/meteodaten_2023_daily.json")
+json_file_path = os.path.join(base_dir, "meteodaten_2023_daily.json")
 
 @app.get("/api/daten")
 def get_daten():

@@ -12,7 +12,7 @@ import { VegaLite } from "react-vega";
 
 export default function App() {
   const [standort, setStandort] = useState([]);
-  const [standortgef, setStandortgef] = useState("");
+  const [standortgef, setStandortgef] = useState([1]);
   const [daten, setDaten] = useState([]);
   const [datengef, setDatengef] = useState([]);
   const [parameter, setParameter] = useState("T");
@@ -32,10 +32,7 @@ export default function App() {
         setDaten(JSONDaten);
         setDatengef(JSONDaten);
         setStandort(JSONStandorte);
-        setStandortgef(JSONStandorte[1] || "");
-      })
-      .catch((error) => {
-        console.error("Fehler beim Abrufen der Daten.", error);
+        setStandortgef(JSONStandorte[1]);
       });
   }, []);
 
@@ -94,10 +91,9 @@ export default function App() {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          marginRight: "15px",
         }}
       >
-        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+        <div style={{ marginLeft: "15px" }}>
           <FormControl sx={{ width: 250 }}>
             <InputLabel id="standort-select-label">Standort </InputLabel>
             <Select
@@ -114,7 +110,7 @@ export default function App() {
             </Select>
           </FormControl>
         </div>
-        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+        <div>
           <FormControl sx={{ width: 250 }}>
             <InputLabel id="parameter-select-label">Parameter</InputLabel>
             <Select
@@ -131,7 +127,7 @@ export default function App() {
             </Select>
           </FormControl>
         </div>
-        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+        <div>
           <Button
             variant="contained"
             onClick={() => {
@@ -143,12 +139,10 @@ export default function App() {
             Diagramm erstellen
           </Button>
         </div>
-      </div>
-      {diagramm && spec && (
-        <div style={{ marginTop: "16px" }}>
-          <VegaLite spec={spec} />
+        <div style={{ marginLeft: "15px" }}>
+          {diagramm && spec && <VegaLite spec={spec} />}
         </div>
-      )}
+      </div>
     </>
   );
 }
