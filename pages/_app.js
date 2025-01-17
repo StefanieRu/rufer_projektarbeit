@@ -20,18 +20,24 @@ export default function App() {
   const [diagramm, setDiagramm] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/py/daten").then((response) => {
-      const JSONDaten = response.data;
+    axios
+      .get("/api/py/daten")
+      .then((response) => {
+        const JSONDaten = response.data;
+        console.log(JSONDaten);
 
-      const JSONStandorte = [
-        ...new Set(JSONDaten.map((item) => item.Standortname)),
-      ];
+        const JSONStandorte = [
+          ...new Set(JSONDaten.map((item) => item.Standortname)),
+        ];
 
-      setDaten(JSONDaten);
-      setDatengef(JSONDaten);
-      setStandort(JSONStandorte);
-      setStandortgef(JSONStandorte[1]);
-    });
+        setDaten(JSONDaten);
+        setDatengef(JSONDaten);
+        setStandort(JSONStandorte);
+        setStandortgef(JSONStandorte[1]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   useEffect(() => {
