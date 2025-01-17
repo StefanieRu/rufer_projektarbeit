@@ -24,7 +24,6 @@ export default function App() {
       .get("https://ruferprojektarbeit.vercel.app/api/daten")
       .then((response) => {
         const JSONDaten = response.data;
-        console.log(JSONDaten);
 
         const JSONStandorte = [
           ...new Set(JSONDaten.map((item) => item.Standortname)),
