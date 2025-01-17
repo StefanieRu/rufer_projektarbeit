@@ -4,6 +4,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -82,52 +83,61 @@ export default function App() {
 
   return (
     <>
-      <p>Wetterdaten Zürich 2023</p>
-      <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
-        <FormControl sx={{ width: 250 }}>
-          <InputLabel id="standort-select-label">Standort </InputLabel>
-          <Select
-            id="standort-select"
-            value={standortgef}
-            label="Standort"
-            onChange={(e) => setStandortgef(e.target.value)}
+      <Typography variant="h4">Wetterdaten Zürich 2023</Typography>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          marginRight: "15px",
+        }}
+      >
+        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+          <FormControl sx={{ width: 250 }}>
+            <InputLabel id="standort-select-label">Standort </InputLabel>
+            <Select
+              id="standort-select"
+              value={standortgef}
+              label="Standort"
+              onChange={(e) => setStandortgef(e.target.value)}
+            >
+              {standort.map((standort) => (
+                <MenuItem key={standort} value={standort}>
+                  {standort}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+          <FormControl sx={{ width: 250 }}>
+            <InputLabel id="parameter-select-label">Parameter</InputLabel>
+            <Select
+              labelId="parameter-select-label"
+              id="parameter-select"
+              value={parameter}
+              label="Parameter"
+              onChange={(event) => setParameter(event.target.value)}
+            >
+              <MenuItem value={"RainDur"}>Regendauer</MenuItem>
+              <MenuItem value={"T"}>Temperatur</MenuItem>
+              <MenuItem value={"T_max_h1"}>Maximaltemperatur</MenuItem>
+              <MenuItem value={"p"}>Luftdruck</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setSpec(createspec());
+              setDiagramm(true);
+            }}
+            disabled={!parameter || !datengef.length}
           >
-            {standort.map((standort) => (
-              <MenuItem key={standort} value={standort}>
-                {standort}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
-        <FormControl sx={{ width: 250 }}>
-          <InputLabel id="parameter-select-label">Parameter</InputLabel>
-          <Select
-            labelId="parameter-select-label"
-            id="parameter-select"
-            value={parameter}
-            label="Parameter"
-            onChange={(event) => setParameter(event.target.value)}
-          >
-            <MenuItem value={"RainDur"}>Regendauer</MenuItem>
-            <MenuItem value={"T"}>Temperatur</MenuItem>
-            <MenuItem value={"T_max_h1"}>Maximaltemperatur</MenuItem>
-            <MenuItem value={"p"}>Luftdruck</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div style={({ marginLeft: "15px" }, { marginTop: "15px" })}>
-        <Button
-          variant="contained"
-          onClick={() => {
-            setSpec(createspec());
-            setDiagramm(true);
-          }}
-          disabled={!parameter || !datengef.length}
-        >
-          Diagramm erstellen
-        </Button>
+            Diagramm erstellen
+          </Button>
+        </div>
       </div>
       {diagramm && spec && (
         <div style={{ marginTop: "16px" }}>
